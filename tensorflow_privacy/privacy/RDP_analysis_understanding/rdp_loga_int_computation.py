@@ -102,3 +102,11 @@ def _compute_log_a_int(q, sigma, alpha): # Called-3
 
  ##--------- EQ:1 summed from k=0 to alpha DONE----------
   return float(log_a)
+
+def _log_add(logx, logy):
+  """Add two numbers in the log space."""
+  a, b = min(logx, logy), max(logx, logy)
+  if a == -np.inf:  # adding 0
+    return b
+  # Use exp(a) + exp(b) = (exp(a - b) + 1) * exp(b)
+  return math.log1p(math.exp(a - b)) + b  # log1p(x) = log(x + 1)
